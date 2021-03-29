@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExpenseItem: Identifiable, Codable {
-    let id = UUID()
+    var id = UUID()
     let name: String
     let type: String
     let amount: Int
@@ -63,16 +63,20 @@ struct ContentView: View {
             }
             .navigationBarTitle("iExpense")
             .navigationBarItems(trailing:
-                Button(action: {
-                    self.showingAddExpense = true
-                }) {
-                    Image(systemName: "plus")
+                HStack(spacing: 20) {
+                    EditButton()
+                    Button(action: {
+                        self.showingAddExpense = true
+                    }) {
+                        Image(systemName: "plus")
+                    }
                 }
             )
             .sheet(isPresented: $showingAddExpense, content: {
                 AddView(expenses: self.expenses)
             })
         }
+        
     }
     
     func removeItems(at offsets: IndexSet) {
