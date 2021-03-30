@@ -56,8 +56,11 @@ struct ContentView: View {
                             Text(item.name)
                                 .font(.headline)
                             Text(item.type)
+                                .foregroundColor(item.amount < 100 ? Color.black : Color.red)
+                                .font(item.amount < 100 ? Font.body : Font.headline)
                         }
                     }
+                    .listRowBackground((item.amount < 10 && item.amount < 100) ? Color.green : Color.yellow)
                 }
                 .onDelete(perform: removeItems)
             }
